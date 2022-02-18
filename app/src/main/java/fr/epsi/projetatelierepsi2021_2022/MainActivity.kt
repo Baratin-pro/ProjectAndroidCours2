@@ -11,6 +11,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setHeaderTitle("Création de compte")
+        isAccount()
         val buttonForm:Button = findViewById(R.id.button_form)
 
         buttonForm.setOnClickListener {

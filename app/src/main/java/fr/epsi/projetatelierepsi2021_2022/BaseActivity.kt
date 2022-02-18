@@ -1,5 +1,8 @@
 package fr.epsi.projetatelierepsi2021_2022
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import java.io.File
 
 open class BaseActivity : AppCompatActivity() {
     fun showBack(){
@@ -16,12 +20,26 @@ open class BaseActivity : AppCompatActivity() {
             finish()
         })
     }
-    fun showToast(txt : String){
-        Toast.makeText(this,txt, Toast.LENGTH_SHORT).show()
+
+    fun showPictureAccount(){
+        val imageViewBack2 = findViewById<ImageView>(R.id.imageView2)
+        imageViewBack2.visibility= View.VISIBLE
     }
+
     fun setHeaderTitle(text:String){
         val textViewTitle = findViewById<TextView>(R.id.textViewTitle)
         textViewTitle.text=text
+    }
+
+    fun isAccount() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("profil", Context.MODE_PRIVATE)
+        val path = "/data/data/fr.epsi.projetatelierepsi2021_2022/shared_prefs"
+        val file = File("$path/profil.xml")
+
+        if(file.exists()){
+            val newIntent = Intent(application,HomeActivity::class.java)
+            startActivity(newIntent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,4 +74,5 @@ open class BaseActivity : AppCompatActivity() {
 
         Log.d("Epsi","############ onDestroy ###########"+ javaClass.simpleName)
     }
+
 }
