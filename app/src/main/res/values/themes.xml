@@ -39,5 +39,14 @@
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
     </style>
-    
+
+    <style name="Theme.ProjetAtelierEpsi20212022.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ProjetAtelierEpsi20212022.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ProjetAtelierEpsi20212022.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

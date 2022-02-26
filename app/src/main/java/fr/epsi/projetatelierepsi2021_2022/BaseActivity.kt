@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import java.io.File
 
 open class BaseActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showPictureAccount(){
-        val imageViewBack2 = findViewById<ImageView>(R.id.imageView2)
+        val imageViewBack2:ImageView = findViewById<ImageView>(R.id.imageView2)
         imageViewBack2.visibility= View.VISIBLE
     }
 

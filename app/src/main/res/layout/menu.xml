@@ -9,21 +9,21 @@
         android:orientation="horizontal">
         <TextView
             style="@style/Tab"
-            android:id="@+id/textViewTab1"
+            android:id="@+id/textViewCarte"
             android:background="@color/purple_500"
-            android:text="Tab1"/>
+            android:text="@string/text_carte"/>
 
         <TextView
             style="@style/Tab"
-            android:id="@+id/textViewTab2"
+            android:id="@+id/textViewOffres"
             android:background="@color/purple_200"
-            android:text="Tab2"/>
+            android:text="@string/text_offres"/>
+
         <TextView
             style="@style/Tab"
-            android:id="@+id/textViewTab3"
+            android:id="@+id/textViewMagasins"
             android:background="@color/purple_200"
-            android:text="Tab2"/>
-
+            android:text="@string/text_magasins"/>
     </LinearLayout>
 
 </LinearLayout>

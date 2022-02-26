@@ -21,9 +21,14 @@ class HomeActivity : BaseActivity() {
         Prenom.setText(readSharedPref("Prenom"))
         Carte.setText(readSharedPref("Carte"))
 
+        val buttonForm:Button = findViewById(R.id.buttonTest)
+
+        buttonForm.setOnClickListener {
+            val newIntent = Intent(application,FragmentActivity::class.java)
+            startActivity(newIntent)
+        }
+
     }
-
-
 
     fun readSharedPref(key:String):String{
         val sharedPreferences: SharedPreferences = getSharedPreferences("profil", Context.MODE_PRIVATE)
@@ -32,3 +37,7 @@ class HomeActivity : BaseActivity() {
 
 
 }
+
+
+
+
