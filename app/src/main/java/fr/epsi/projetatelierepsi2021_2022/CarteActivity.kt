@@ -17,8 +17,8 @@ class CarteActivity : Fragment() {
                               container: ViewGroup?, savedInstanceState: Bundle?): View?
             = inflater.inflate(R.layout.activity_home, container, false).apply{
         super.onCreate(savedInstanceState)
-        val imageViewBack2:ImageView = findViewById<ImageView>(R.id.imageView2)
-        imageViewBack2.visibility= View.VISIBLE
+        //val imageViewBack2:ImageView = findViewById<ImageView>(R.id.imageView2)
+        //imageViewBack2.visibility= View.VISIBLE
 
         val Nom:TextView = findViewById(R.id.textFName)
         val Prenom:TextView = findViewById(R.id.textSName)
@@ -31,7 +31,7 @@ class CarteActivity : Fragment() {
     }
 
     fun readSharedPref(key:String):String{
-        val sharedPreferences:SharedPreferences =  this.requireActivity().getSharedPreferences("profil", Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences = this.requireActivity().getSharedPreferences("profil", Context.MODE_PRIVATE)
         return sharedPreferences.getString(key,"not found").toString()
     }
 }

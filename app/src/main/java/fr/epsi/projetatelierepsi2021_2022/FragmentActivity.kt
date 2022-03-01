@@ -12,7 +12,7 @@ class FragmentActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         Log.d("fragment", "***")
         setContentView(R.layout.activity_fragmet)
-        //showPictureAccount()
+        showPictureAccount()
 
         val tabCarte=findViewById<TextView>(R.id.textViewCarte)
         val tabOffres=findViewById<TextView>(R.id.textViewOffres)
@@ -31,6 +31,7 @@ class FragmentActivity : BaseActivity() {
             showTabCarte()
         })
 
+        setHeaderTitle("Application")
         showTabCarte()
     }
 

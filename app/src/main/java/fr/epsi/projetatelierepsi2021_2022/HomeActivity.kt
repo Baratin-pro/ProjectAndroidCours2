@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.TextView
 
 class HomeActivity : BaseActivity() {
-    val tab1Fragment=FragmentMagasins.newInstance("","")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
@@ -79,7 +78,7 @@ class HomeActivity : BaseActivity() {
             super.onBackPressed()
         else
             finish()
-    }
+    }*/
 }
 
 

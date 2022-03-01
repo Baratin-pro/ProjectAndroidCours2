@@ -2,6 +2,7 @@ package fr.epsi.projetatelierepsi2021_2022
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -125,6 +126,22 @@ class MapsFragment : Fragment() {
         googleMap.setOnMapClickListener {
             (activity as BaseActivity).showToast(it.toString())
         }
+
+        googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
+            // which is clicked and displaying it in a toast message.
+            val markerName = marker.title
+
+            for(i in 0..items.length()-1){
+                val jsonCity= items.getJSONObject(i)
+                if(jsonCity.optString("city") == marker.title){
+                    val data = items.getJSONObject(i)
+                    Log.d("datae", data.toString())
+                    val intent = Intent(this.context, FicheMagasinActivity::class.java)
+                    this.context?.startActivity(intent)
+                }
+            }
+            false
+        })
 
         googleMap.setOnInfoWindowClickListener {
             (activity as BaseActivity).showToast(it.toString())
