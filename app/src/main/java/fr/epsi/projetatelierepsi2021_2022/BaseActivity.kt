@@ -26,6 +26,15 @@ open class BaseActivity : AppCompatActivity() {
         imageViewBack2.visibility= View.VISIBLE
     }
 
+    fun getAccount(){
+        val imageProfile = findViewById<ImageView>(R.id.imageView2)
+        imageProfile.visibility= View.VISIBLE
+        imageProfile.setOnClickListener(View.OnClickListener {
+            val newIntent = Intent(application,AccountActivity::class.java)
+            startActivity(newIntent)
+        })
+    }
+
     fun showToast(txt : String){
         Toast.makeText(this,txt, Toast.LENGTH_SHORT).show()
     }
@@ -33,6 +42,18 @@ open class BaseActivity : AppCompatActivity() {
     fun setHeaderTitle(text:String){
         val textViewTitle = findViewById<TextView>(R.id.textViewTitle)
         textViewTitle.text=text
+    }
+
+    fun writeSharedPref(key:String,value:String){
+        val sharedPreferences: SharedPreferences = getSharedPreferences("profil", Context.MODE_PRIVATE)
+        val editor =sharedPreferences.edit()
+        editor.putString(key,value)
+        editor.apply()
+    }
+
+    fun readSharedPref(key:String):String{
+        val sharedPreferences: SharedPreferences = getSharedPreferences("profil", Context.MODE_PRIVATE)
+        return sharedPreferences.getString(key,"not found").toString()
     }
 
     fun isAccount() {

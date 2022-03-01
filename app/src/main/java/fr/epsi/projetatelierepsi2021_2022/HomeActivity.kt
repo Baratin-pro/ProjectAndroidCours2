@@ -41,10 +41,11 @@ class HomeActivity : BaseActivity() {
         })*/
     }
 
-    fun readSharedPref(key:String):String{
+    /*fun readSharedPref(key:String):String{
         val sharedPreferences: SharedPreferences = getSharedPreferences("profil", Context.MODE_PRIVATE)
         return sharedPreferences.getString(key,"not found").toString()
     }
+    */
 
     /*private fun showTabCarte() {
         val fragmentManager = supportFragmentManager

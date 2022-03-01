@@ -18,6 +18,7 @@ class FragmentActivity : BaseActivity() {
         val tabOffres=findViewById<TextView>(R.id.textViewOffres)
         val tabMagasin=findViewById<TextView>(R.id.textViewMagasins)
         showBack()
+        getAccount()
 
         tabOffres.setOnClickListener(View.OnClickListener{
             showTabOffres()
@@ -67,10 +68,5 @@ class FragmentActivity : BaseActivity() {
             super.onBackPressed()
         else
             finish()
-    }
-
-    fun readSharedPref(key:String):String{
-        val sharedPreferences: SharedPreferences = getSharedPreferences("profil", Context.MODE_PRIVATE)
-        return sharedPreferences.getString(key,"not found").toString()
     }
 }

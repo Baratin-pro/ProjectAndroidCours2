@@ -16,7 +16,7 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/titre" />
 
         <ImageView
             android:layout_centerVertical="true"

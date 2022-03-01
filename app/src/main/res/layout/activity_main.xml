@@ -36,7 +36,7 @@
                 android:layout_width="200dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:text="Remplir le formulaire manuellement" />
+                android:text="@string/formulaire" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

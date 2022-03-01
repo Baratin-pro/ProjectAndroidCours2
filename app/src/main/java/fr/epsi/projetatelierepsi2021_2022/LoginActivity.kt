@@ -38,15 +38,4 @@ class LoginActivity : BaseActivity() {
         savePrenom.setText(readSharedPref("prenom"))
         saveNom.setText(readSharedPref("nom")) */
     }
-
-
-
-    fun writeSharedPref(key:String,value:String){
-        val sharedPreferences: SharedPreferences = getSharedPreferences("profil", Context.MODE_PRIVATE)
-        val editor =sharedPreferences.edit()
-        editor.putString(key,value)
-        editor.apply()
-    }
-
-
 }
