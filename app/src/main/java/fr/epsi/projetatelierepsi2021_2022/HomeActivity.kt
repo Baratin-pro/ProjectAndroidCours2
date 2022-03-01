@@ -5,10 +5,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 
 class HomeActivity : BaseActivity() {
+    val tab1Fragment=FragmentMagasins.newInstance("","")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -21,13 +24,22 @@ class HomeActivity : BaseActivity() {
         Prenom.setText(readSharedPref("Prenom"))
         Carte.setText(readSharedPref("Carte"))
 
-        val buttonForm:Button = findViewById(R.id.buttonTest)
+        val tabCarte=findViewById<TextView>(R.id.textViewCarte)
+        val tabOffres=findViewById<TextView>(R.id.textViewOffres)
+        val tabMagasin=findViewById<TextView>(R.id.textViewMagasins)
+        showBack()
 
-        buttonForm.setOnClickListener {
-            val newIntent = Intent(application,FragmentActivity::class.java)
-            startActivity(newIntent)
-        }
+        tabOffres.setOnClickListener(View.OnClickListener {
+            showTabOffres()
+        })
 
+        tabMagasin.setOnClickListener(View.OnClickListener {
+            showTabMagasin()
+        })
+
+        tabCarte.setOnClickListener(View.OnClickListener {
+            showTabCarte()
+        })
     }
 
     fun readSharedPref(key:String):String{
@@ -35,7 +47,39 @@ class HomeActivity : BaseActivity() {
         return sharedPreferences.getString(key,"not found").toString()
     }
 
+    private fun showTabCarte() {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setReorderingAllowed(true)
+        fragmentTransaction.addToBackStack("Tab1Fragment") // name can be null
+        fragmentTransaction.replace(R.id.fragment_container, MapsFragment::class.java, null)
+        fragmentTransaction.commit()
+    }
 
+    private fun showTabOffres() {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setReorderingAllowed(true)
+        fragmentTransaction.addToBackStack("Tab2Fragment") // name can be null
+        fragmentTransaction.replace(R.id.fragment_container, FragmentOffres::class.java, null)
+        fragmentTransaction.commit()
+    }
+
+    private fun showTabMagasin() {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setReorderingAllowed(true)
+        fragmentTransaction.addToBackStack("Tab3Fragment") // name can be null
+        fragmentTransaction.replace(R.id.fragment_container, tab1Fragment, null)
+        fragmentTransaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount>1)
+            super.onBackPressed()
+        else
+            finish()
+    }
 }
 
 

@@ -13,10 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetAtelierEpsi20212022">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB-rqRamtY0DZGVUlam5tpkVE72QwmjyZY" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".OffreOnlineActivity"
             android:exported="false"
-            android:theme="@style/Theme.ProjetAtelierEpsi20212022.NoActionBar"/>
+            android:theme="@style/Theme.ProjetAtelierEpsi20212022.NoActionBar" />
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
