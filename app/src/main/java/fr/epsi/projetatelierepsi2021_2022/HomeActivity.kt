@@ -34,7 +34,7 @@ class HomeActivity : BaseActivity() {
         })
 
         tabMagasin.setOnClickListener(View.OnClickListener {
-            showTabMagasin()
+            showTabMagasins()
         })
 
         tabCarte.setOnClickListener(View.OnClickListener {
@@ -52,7 +52,7 @@ class HomeActivity : BaseActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.setReorderingAllowed(true)
         fragmentTransaction.addToBackStack("Tab1Fragment") // name can be null
-        fragmentTransaction.replace(R.id.fragment_container, MapsFragment::class.java, null)
+        fragmentTransaction.replace(R.id.fragment_container, CarteActivity::class.java, null)
         fragmentTransaction.commit()
     }
 
@@ -65,12 +65,12 @@ class HomeActivity : BaseActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun showTabMagasin() {
+    private fun showTabMagasins() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.setReorderingAllowed(true)
         fragmentTransaction.addToBackStack("Tab3Fragment") // name can be null
-        fragmentTransaction.replace(R.id.fragment_container, tab1Fragment, null)
+        fragmentTransaction.replace(R.id.fragment_container, MapsFragment::class.java, null)
         fragmentTransaction.commit()
     }
 

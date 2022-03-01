@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,11 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import okhttp3.*
 import org.json.JSONObject
+import java.io.IOException
 
 class MapsFragment : Fragment() {
 
@@ -40,6 +45,41 @@ class MapsFragment : Fragment() {
         }
     }
 
+    val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
+    val mRequestURL="https://djemam.com/epsi/stores.json"
+    val request = Request.Builder()
+        .url(mRequestURL)
+        .get()
+        .cacheControl(CacheControl.FORCE_NETWORK)
+        .build()
+
+    /*okHttpClient.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val data = response.body?.string()
+
+            if(data!=null){
+                val jsStudents = JSONObject(data)
+                val jsArrayStudents= jsStudents.getJSONArray("items")
+                for(i in 0 until jsArrayStudents.length()){
+                    val jsStudent = jsArrayStudents.getJSONObject(i)
+                    val student = Student(jsStudent.optString("name",""),
+                        jsStudent.optString("email",""),
+                        jsStudent.optString("picture_url",""),jsStudent.optString("phone",""),jsStudent.optString("city",""),jsStudent.optString("zipcode",""))
+                    students.add(student)
+                    Log.d("student",student.name)
+                }
+                Log.d("Student","${students.size}")
+                runOnUiThread(Runnable {
+                    studentAdapter.notifyDataSetChanged()
+                })
+            }
+        }
+
+    })*/
 
     val cities="{\"cities\":[{\"city\":\"Bordeaux\",\"lan\":44.847807,\"lng\":-0.579472},\n" +
             "{\"city\":\"Pau\",\"lan\":43.293295,\"lng\":-0.363570},\n" +
