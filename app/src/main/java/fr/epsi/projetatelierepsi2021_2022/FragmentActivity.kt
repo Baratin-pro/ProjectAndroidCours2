@@ -38,7 +38,7 @@ class FragmentActivity : BaseActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.setReorderingAllowed(true)
-        fragmentTransaction.addToBackStack("Tab1Fragment") // name can be null
+        fragmentTransaction.addToBackStack("Carte") // name can be null
         fragmentTransaction.replace(R.id.fragment_container, CarteActivity::class.java, null)
         fragmentTransaction.commit()
     }
@@ -47,7 +47,7 @@ class FragmentActivity : BaseActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.setReorderingAllowed(true)
-        fragmentTransaction.addToBackStack("Tab2Fragment") // name can be null
+        fragmentTransaction.addToBackStack("Offres") // name can be null
         fragmentTransaction.replace(R.id.fragment_container, FragmentOffres::class.java, null)
         fragmentTransaction.commit()
     }
@@ -56,7 +56,7 @@ class FragmentActivity : BaseActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.setReorderingAllowed(true)
-        fragmentTransaction.addToBackStack("Tab3Fragment") // name can be null
+        fragmentTransaction.addToBackStack("Magasins") // name can be null
         fragmentTransaction.replace(R.id.fragment_container, MapsFragment::class.java, null)
         fragmentTransaction.commit()
     }

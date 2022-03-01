@@ -79,7 +79,7 @@ class HomeActivity : BaseActivity() {
             super.onBackPressed()
         else
             finish()
-    }*/
+    }
 }
 
 
