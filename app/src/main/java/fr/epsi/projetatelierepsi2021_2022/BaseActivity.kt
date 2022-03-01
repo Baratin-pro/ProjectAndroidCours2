@@ -41,7 +41,9 @@ open class BaseActivity : AppCompatActivity() {
         val file = File("$path/profil.xml")
 
         if(file.exists()){
-            val newIntent = Intent(application,HomeActivity::class.java)
+            //val newIntent = Intent(application,HomeActivity::class.java)
+            //startActivity(newIntent)
+            val newIntent = Intent(application,FragmentActivity::class.java)
             startActivity(newIntent)
         }
     }

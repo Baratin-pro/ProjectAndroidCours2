@@ -14,17 +14,17 @@ class HomeActivity : BaseActivity() {
     val tab1Fragment=FragmentMagasins.newInstance("","")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-        showPictureAccount()
+        setContentView(R.layout.activity_fragment)
+        /*showPictureAccount()
         val Nom:TextView = findViewById(R.id.textFName)
         val Prenom:TextView = findViewById(R.id.textSName)
         val Carte:TextView = findViewById(R.id.textNumberCard)
 
         Nom.setText(readSharedPref("Nom"))
         Prenom.setText(readSharedPref("Prenom"))
-        Carte.setText(readSharedPref("Carte"))
+        Carte.setText(readSharedPref("Carte"))*/
 
-        val tabCarte=findViewById<TextView>(R.id.textViewCarte)
+        /*val tabCarte=findViewById<TextView>(R.id.textViewCarte)
         val tabOffres=findViewById<TextView>(R.id.textViewOffres)
         val tabMagasin=findViewById<TextView>(R.id.textViewMagasins)
         showBack()
@@ -39,7 +39,7 @@ class HomeActivity : BaseActivity() {
 
         tabCarte.setOnClickListener(View.OnClickListener {
             showTabCarte()
-        })
+        })*/
     }
 
     fun readSharedPref(key:String):String{
@@ -47,7 +47,7 @@ class HomeActivity : BaseActivity() {
         return sharedPreferences.getString(key,"not found").toString()
     }
 
-    private fun showTabCarte() {
+    /*private fun showTabCarte() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.setReorderingAllowed(true)
@@ -79,7 +79,7 @@ class HomeActivity : BaseActivity() {
             super.onBackPressed()
         else
             finish()
-    }
+    }*/
 }
 
 
