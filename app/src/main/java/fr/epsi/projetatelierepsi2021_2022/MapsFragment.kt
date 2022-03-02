@@ -71,7 +71,7 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
         if(string_stores !== null){
-            val jsStores = JSONObject(string_stores)
+            val jsStores = JSONObject(cities)
             val stores = arrayListOf<Store>()
             val jsArrayStores = jsStores.getJSONArray("stores")
             for(i in 0 until jsArrayStores.length()){
@@ -88,7 +88,7 @@ class MapsFragment : Fragment() {
                 stores.add(store)
                 Log.d("store",store.storeId)
             }
-            val jsonCities= JSONObject(cities)
+            //val jsonCities= JSONObject(cities)
             //val items=jsonCities.getJSONArray("cities")
 
             val jsonStores = JSONObject(stores.toString())

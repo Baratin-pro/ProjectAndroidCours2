@@ -58,7 +58,7 @@ class FragmentActivity : BaseActivity() {
     }
 
     private fun showTabMagasins() {
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
+        /*val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
         val mRequestURL="https://djemam.com/epsi/stores.json"
         val request = Request.Builder()
             .url(mRequestURL)
@@ -87,7 +87,13 @@ class FragmentActivity : BaseActivity() {
                 }
             }
 
-        })
+        })*/
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setReorderingAllowed(true)
+        fragmentTransaction.addToBackStack("Tab3Fragment") // name can be null
+        fragmentTransaction.replace(R.id.fragment_container, MapsFragment::class.java, null)
+        fragmentTransaction.commit()
     }
 
     override fun onBackPressed() {

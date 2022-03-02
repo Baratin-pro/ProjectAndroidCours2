@@ -62,7 +62,7 @@ class FragmentOffres : Fragment() {
 
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                TODO("Not yet implemented")
+                Log.d("Failure", "***")
             }
 
             override fun onResponse(call: Call, response: Response) {
