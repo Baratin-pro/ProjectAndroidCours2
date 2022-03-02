@@ -1,7 +1,5 @@
 package fr.epsi.projetatelierepsi2021_2022
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button

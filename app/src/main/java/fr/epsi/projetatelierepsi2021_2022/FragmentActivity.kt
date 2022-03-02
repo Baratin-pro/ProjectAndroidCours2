@@ -1,6 +1,5 @@
 package fr.epsi.projetatelierepsi2021_2022
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +11,6 @@ import java.io.IOException
 class FragmentActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("fragment", "***")
         setContentView(R.layout.activity_fragmet)
         showPictureAccount()
 

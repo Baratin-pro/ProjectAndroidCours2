@@ -77,9 +77,7 @@ class FragmentOffres : Fragment() {
                             jsOffre.optString("description",""),
                             jsOffre.optString("picture_url",""))
                         offres.add(offre)
-                        Log.d("offre",offre.name)
                     }
-                    Log.d("Offres","${offres.size}")
                     activity?.runOnUiThread(Runnable {
                         offreAdapter.notifyDataSetChanged()
                     })

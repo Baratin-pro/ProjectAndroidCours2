@@ -13,8 +13,6 @@ class FicheMagasinActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.magasin_fiche)
 
-        Log.d("FicheMagasinActivity", "FicheMagasinActivity")
-
         val magasin_nom = intent.getStringExtra("magasin_nom")
         val image = intent.getStringExtra("image")
         val address = intent.getStringExtra("address")
