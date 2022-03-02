@@ -3,30 +3,27 @@ package fr.epsi.projetatelierepsi2021_2022
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import okhttp3.*
 import org.json.JSONObject
-import java.io.IOException
 
 class MapsFragment : Fragment() {
 
     lateinit var googleMap :GoogleMap
+
+    val string_stores = getArguments()?.getString("stores");
 
     @SuppressLint("MissingPermission")
     val locationPermissionRequest = registerForActivityResult(
@@ -41,46 +38,10 @@ class MapsFragment : Fragment() {
                 // Only approximate location access granted.
                 googleMap.isMyLocationEnabled=true
             } else -> {
-            // No location access granted.
-        }
-        }
-    }
-
-    val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
-    val mRequestURL="https://djemam.com/epsi/stores.json"
-    val request = Request.Builder()
-        .url(mRequestURL)
-        .get()
-        .cacheControl(CacheControl.FORCE_NETWORK)
-        .build()
-
-    /*okHttpClient.newCall(request).enqueue(object : Callback {
-        override fun onFailure(call: Call, e: IOException) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onResponse(call: Call, response: Response) {
-            val data = response.body?.string()
-
-            if(data!=null){
-                val jsStudents = JSONObject(data)
-                val jsArrayStudents= jsStudents.getJSONArray("items")
-                for(i in 0 until jsArrayStudents.length()){
-                    val jsStudent = jsArrayStudents.getJSONObject(i)
-                    val student = Student(jsStudent.optString("name",""),
-                        jsStudent.optString("email",""),
-                        jsStudent.optString("picture_url",""),jsStudent.optString("phone",""),jsStudent.optString("city",""),jsStudent.optString("zipcode",""))
-                    students.add(student)
-                    Log.d("student",student.name)
-                }
-                Log.d("Student","${students.size}")
-                runOnUiThread(Runnable {
-                    studentAdapter.notifyDataSetChanged()
-                })
+                // No location access granted.
             }
         }
-
-    })*/
+    }
 
     val cities="{\"cities\":[{\"city\":\"Bordeaux\",\"lan\":44.847807,\"lng\":-0.579472},\n" +
             "{\"city\":\"Pau\",\"lan\":43.293295,\"lng\":-0.363570},\n" +
@@ -99,6 +60,7 @@ class MapsFragment : Fragment() {
             "{\"city\":\"Strasbourg\",\"lan\":48.540395,\"lng\":7.727753}]}";
 
     private val callback = OnMapReadyCallback { googleMap ->
+
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -108,47 +70,68 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
+        if(string_stores !== null){
+            val jsStores = JSONObject(string_stores)
+            val stores = arrayListOf<Store>()
+            val jsArrayStores = jsStores.getJSONArray("stores")
+            for(i in 0 until jsArrayStores.length()){
+                val jsStore = jsArrayStores.getJSONObject(i)
+                val store = Store(jsStore.optString("storeId",""),
+                    jsStore.optString("name",""),
+                    jsStore.optString("description",""),
+                    jsStore.optString("pictureStore",""),
+                    jsStore.optString("address",""),
+                    jsStore.optString("city",""),
+                    jsStore.optString("longitude",""),
+                    jsStore.optString("latitude",""),
+                    jsStore.optString("zipcode",""))
+                stores.add(store)
+                Log.d("store",store.storeId)
+            }
+            val jsonCities= JSONObject(cities)
+            //val items=jsonCities.getJSONArray("cities")
 
-        val jsonCities= JSONObject(cities)
-        val items=jsonCities.getJSONArray("cities")
-
-        for(i in 0..items.length()-1){
-            val jsonCity= items.getJSONObject(i)
-            val city=MarkerOptions()
-            val cityLatLng = LatLng(jsonCity.optDouble("lan", 0.0), jsonCity.optDouble("lng",0.0))
-            city.title(jsonCity.optString("city"))
-            city.position(cityLatLng)
-            googleMap.addMarker(city)
-        }
-
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(48.854885,2.338646),5f))
-
-        googleMap.setOnMapClickListener {
-            (activity as BaseActivity).showToast(it.toString())
-        }
-
-        googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
-            // which is clicked and displaying it in a toast message.
-            val markerName = marker.title
+            val jsonStores = JSONObject(stores.toString())
+            val items=jsonStores.getJSONArray("stores")
 
             for(i in 0..items.length()-1){
-                val jsonCity= items.getJSONObject(i)
-                if(jsonCity.optString("city") == marker.title){
-                    val data = items.getJSONObject(i)
-                    Log.d("datae", data.toString())
-                    val intent = Intent(this.context, FicheMagasinActivity::class.java)
-                    this.context?.startActivity(intent)
-                }
+                val jsonStore= items.getJSONObject(i)
+                val store=MarkerOptions()
+                val cityLatLng = LatLng(jsonStore.optDouble("latitude", 0.0), jsonStore.optDouble("longitude",0.0))
+                store.title(jsonStore.optString("name"))
+                store.position(cityLatLng)
+                googleMap.addMarker(store)
             }
-            false
-        })
 
-        googleMap.setOnInfoWindowClickListener {
-            (activity as BaseActivity).showToast(it.toString())
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(48.854885,2.338646),5f))
+
+            googleMap.setOnMapClickListener {
+                (activity as BaseActivity).showToast(it.toString())
+            }
+
+            googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
+                // which is clicked and displaying it in a toast message.
+                val markerName = marker.title
+
+                for(i in 0..items.length()-1){
+                    val jsonCity= items.getJSONObject(i)
+                    if(jsonCity.optString("city") == marker.title){
+                        val data = items.getJSONObject(i)
+                        Log.d("datae", data.toString())
+                        val intent = Intent(this.context, FicheMagasinActivity::class.java)
+                        this.context?.startActivity(intent)
+                    }
+                }
+                false
+            })
+
+            googleMap.setOnInfoWindowClickListener {
+                (activity as BaseActivity).showToast(it.toString())
+            }
+            this.googleMap=googleMap
+            locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
+
         }
-        this.googleMap=googleMap
-        locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
-
     }
 
     override fun onCreateView(
