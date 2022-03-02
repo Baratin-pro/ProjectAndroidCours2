@@ -3,12 +3,14 @@ package fr.epsi.projetatelierepsi2021_2022
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -114,12 +116,13 @@ import org.json.JSONObject
         mapFragment?.getMapAsync(callback)
     }
 }*/
-class MapsFragment : Fragment() {
+class MapsFragment() : Fragment() {
 
     lateinit var googleMap :GoogleMap
 
-    val string_stores = getArguments()?.getString("stores");
 
+
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("MissingPermission")
     val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -154,8 +157,9 @@ class MapsFragment : Fragment() {
             "{\"city\":\"Tours\",\"lan\":47.404355,\"lng\":0.688930},\n" +
             "{\"city\":\"Strasbourg\",\"lan\":48.540395,\"lng\":7.727753}]}";
 
-    private val callback = OnMapReadyCallback { googleMap ->
+    fun callback(string_stores:String): OnMapReadyCallback {
 
+        return OnMapReadyCallback { googleMap ->
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -166,7 +170,7 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
         if(string_stores !== null){
-            val jsStores = JSONObject(cities)
+            val jsStores = JSONObject(string_stores)
             val stores = arrayListOf<Store>()
             val jsArrayStores = jsStores.getJSONArray("stores")
             for(i in 0 until jsArrayStores.length()){
@@ -181,20 +185,18 @@ class MapsFragment : Fragment() {
                     jsStore.optString("latitude",""),
                     jsStore.optString("zipcode",""))
                 stores.add(store)
-                Log.d("store",store.storeId)
             }
-            //val jsonCities= JSONObject(cities)
-            //val items=jsonCities.getJSONArray("cities")
+            Log.d("Store size ", jsArrayStores.length().toString())
 
-            val jsonStores = JSONObject(stores.toString())
-            val items=jsonStores.getJSONArray("stores")
-
-            for(i in 0..items.length()-1){
-                val jsonStore= items.getJSONObject(i)
+            for(i in 0 until jsArrayStores.length()){
+                val jsonStore= jsArrayStores.getJSONObject(i)
                 val store=MarkerOptions()
                 val cityLatLng = LatLng(jsonStore.optDouble("latitude", 0.0), jsonStore.optDouble("longitude",0.0))
                 store.title(jsonStore.optString("name"))
+                store.snippet(jsonStore.optString("address") + "-" + jsonStore.optString("zipcode") + " " + jsonStore.optString("city"))
+                Log.d("position ", cityLatLng.toString())
                 store.position(cityLatLng)
+                Log.d("store",jsonStore.optString("storeId"))
                 googleMap.addMarker(store)
             }
 
@@ -204,16 +206,23 @@ class MapsFragment : Fragment() {
                 (activity as BaseActivity).showToast(it.toString())
             }
 
+
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
-                val markerName = marker.title
+                for(i in 0..jsArrayStores.length()-1){
+                    val jsonCity= jsArrayStores.getJSONObject(i)
+                    Log.d("name ", jsonCity.optString("name"))
+                    Log.d("marker.title ", marker.title)
 
-                for(i in 0..items.length()-1){
-                    val jsonCity= items.getJSONObject(i)
-                    if(jsonCity.optString("city") == marker.title){
-                        val data = items.getJSONObject(i)
-                        Log.d("datae", data.toString())
+                    if(jsonCity.optString("name") == marker.title){
+                        val data = jsArrayStores.getJSONObject(i)
                         val intent = Intent(this.context, FicheMagasinActivity::class.java)
+                        intent.putExtra("magasin_nom", data.optString("name"))
+                        intent.putExtra("image", data.optString("pictureStore"))
+                        intent.putExtra("address", data.optString("address"))
+                        intent.putExtra("zipcode", data.optString("zipcode"))
+                        intent.putExtra("city", data.optString("city"))
+                        intent.putExtra("description", data.optString("description"))
                         this.context?.startActivity(intent)
                     }
                 }
@@ -229,6 +238,7 @@ class MapsFragment : Fragment() {
         } else {
             Log.d("string stores ", "string stores null aze")
         }
+        }
     }
 
     override fun onCreateView(
@@ -242,6 +252,11 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+        val string_stores = getArguments()?.getString("stores");
+        Log.d("string storez", string_stores.toString())
+        if (string_stores != null) {
+            mapFragment?.getMapAsync(callback(string_stores))
+        }
     }
+
 }

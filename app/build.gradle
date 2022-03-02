@@ -8,7 +8,7 @@ plugins {
 android {
     signingConfigs {
         config {
-            storeFile file('/Users/rodicaadigbonon/AndroidStudioProjects/ProjectAndroidCours2/keystore')
+            storeFile file('../keystore')
             storePassword 'epsi2022'
             keyAlias 'ProjectAndroidCours2'
             keyPassword 'epsi2022'

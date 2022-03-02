@@ -30,9 +30,8 @@
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".OffreOnlineActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ProjetAtelierEpsi20212022.NoActionBar" />
+            android:name=".FicheMagasinActivity"
+            android:exported="false"/>
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
