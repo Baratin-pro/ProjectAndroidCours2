@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "921073846620",
-    "project_id": "epsiprojet2android",
-    "storage_bucket": "epsiprojet2android.appspot.com"
+    "project_number": "990003299528",
+    "project_id": "projetatelierepsi2021-2022",
+    "storage_bucket": "projetatelierepsi2021-2022.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:921073846620:android:d2ae908323a765d6d9d999",
+        "mobilesdk_app_id": "1:990003299528:android:ff14aa3e339052af18d1fd",
         "android_client_info": {
           "package_name": "fr.epsi.projetatelierepsi2021_2022"
         }
       },
       "oauth_client": [
         {
-          "client_id": "921073846620-mfv1ju08e50bb18u8g08v0kn1jkpl38v.apps.googleusercontent.com",
+          "client_id": "990003299528-tsjfcib8cc5jnb3qvalonnmubm3h13ed.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.epsi.projetatelierepsi2021_2022",
+            "certificate_hash": "3b969a448c0f742db09dca7b7da890f976e2e012"
+          }
+        },
+        {
+          "client_id": "990003299528-1f05871l0oegcgu10ds8sc9qhi438t3c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgTfdY21uOV7TtI0eC-9mU4f1wd6AHSTQ"
+          "current_key": "AIzaSyABzIAk_C0yi1GtS3JqIR0Sf9qG8es3pJU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "921073846620-mfv1ju08e50bb18u8g08v0kn1jkpl38v.apps.googleusercontent.com",
+              "client_id": "990003299528-1f05871l0oegcgu10ds8sc9qhi438t3c.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
