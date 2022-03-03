@@ -88,7 +88,6 @@ open class BaseActivity : AppCompatActivity() {
         Log.d("Epsi","############ onPause ###########"+ javaClass.simpleName)
     }
 
-
     override fun onStop() {
         super.onStop()
         Log.d("Epsi","############ onStop ###########"+ javaClass.simpleName)
@@ -99,5 +98,4 @@ open class BaseActivity : AppCompatActivity() {
 
         Log.d("Epsi","############ onDestroy ###########"+ javaClass.simpleName)
     }
-
 }

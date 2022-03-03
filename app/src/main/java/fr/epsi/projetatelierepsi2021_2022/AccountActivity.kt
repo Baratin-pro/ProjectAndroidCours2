@@ -12,7 +12,6 @@ class AccountActivity : BaseActivity() {
         setContentView(R.layout.activity_account)
         setHeaderTitle("Compte")
 
-
         val saveEmail: TextView = findViewById(R.id.editEmail)
         val savePrenom: TextView = findViewById(R.id.editPrenom)
         val saveNom: TextView = findViewById(R.id.editNom)

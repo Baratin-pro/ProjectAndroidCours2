@@ -46,6 +46,5 @@ class LoginActivity : BaseActivity() {
         textZipcode.text = intent.getStringExtra("zipcode")
         textCity.text = intent.getStringExtra("city")
         textCardRef.text = intent.getStringExtra("cardRef")
-
     }
 }
