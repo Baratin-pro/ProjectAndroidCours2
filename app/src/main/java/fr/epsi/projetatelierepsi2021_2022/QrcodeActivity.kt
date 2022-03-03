@@ -65,7 +65,7 @@ class QrcodeActivity : AppCompatActivity() {
                     Log.v("qrcodes","${qrcodes.size}")
                     runOnUiThread(Runnable {
                         val newIntent = Intent(application, LoginActivity::class.java)
-                        newIntent.putExtra("firstName",qrcodes[0].firstName)
+                        newIntent.putExtra("firstName", qrcodes[0].firstName)
                         newIntent.putExtra("lastName",qrcodes[0].lastName)
                         newIntent.putExtra("email",qrcodes[0].email)
                         newIntent.putExtra("address",qrcodes[0].address)

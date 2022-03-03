@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 
 class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,9 +13,9 @@ class LoginActivity : BaseActivity() {
         setHeaderTitle("Création de compte")
         showBack()
 
-        val saveEmail:EditText= findViewById(R.id.editEmail)
         val savePrenom:EditText= findViewById(R.id.editPrenom)
         val saveNom:EditText= findViewById(R.id.editNom)
+        val saveEmail:EditText= findViewById(R.id.editEmail)
         val saveAdresse:EditText= findViewById(R.id.editAddress)
         val saveCodePostal:EditText= findViewById(R.id.editCodePostal)
         val saveVille:EditText= findViewById(R.id.editVille)
@@ -31,9 +32,21 @@ class LoginActivity : BaseActivity() {
             writeSharedPref("Carte",saveCarte.text.toString())
             isAccount()
         })
+        val textFirstName:TextView = findViewById(R.id.editPrenom)
+        val textLastName:TextView = findViewById(R.id.editNom)
+        val textEmail:TextView = findViewById(R.id.editEmail)
+        val textAdress:TextView = findViewById(R.id.editAddress)
+        val textZipcode:TextView = findViewById(R.id.editCodePostal)
+        val textCity:TextView = findViewById(R.id.editVille)
+        val textCardRef:TextView = findViewById(R.id.editCarte)
 
-        /*saveEmail.setText(readSharedPref("email"))
-        savePrenom.setText(readSharedPref("prenom"))
-        saveNom.setText(readSharedPref("nom")) */
+        textFirstName.text = intent.getStringExtra("firstName")
+        textLastName.text = intent.getStringExtra("lastName")
+        textEmail.text = intent.getStringExtra("email")
+        textAdress.text = intent.getStringExtra("address")
+        textZipcode.text = intent.getStringExtra("zipcode")
+        textCity.text = intent.getStringExtra("city")
+        textCardRef.text = intent.getStringExtra("cardRef")
+
     }
 }
