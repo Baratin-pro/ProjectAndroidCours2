@@ -27,7 +27,6 @@ class QrcodeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrcode)
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
-        val tv_text_View:TextView = findViewById(R.id.tv_text_view)
 
         codeScanner = CodeScanner(this, scannerView)
 

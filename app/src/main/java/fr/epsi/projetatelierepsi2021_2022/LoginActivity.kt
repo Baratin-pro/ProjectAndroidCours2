@@ -11,7 +11,6 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setHeaderTitle("Création de compte")
-        showBack()
 
         val savePrenom:EditText= findViewById(R.id.editPrenom)
         val saveNom:EditText= findViewById(R.id.editNom)
@@ -21,7 +20,7 @@ class LoginActivity : BaseActivity() {
         val saveVille:EditText= findViewById(R.id.editVille)
         val saveCarte:EditText= findViewById(R.id.editCarte)
         val buttonSubmit:Button = findViewById(R.id.buttonSubmitForm)
-        showBack()
+
         buttonSubmit.setOnClickListener(View.OnClickListener {
             writeSharedPref("Prenom",savePrenom.text.toString())
             writeSharedPref("Nom",saveNom.text.toString())
